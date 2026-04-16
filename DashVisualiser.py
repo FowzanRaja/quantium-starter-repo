@@ -2,32 +2,26 @@ import pandas as pd
 from dash import Dash, html, dcc
 import plotly.express as px
 
-# Read processed data
-df = pd.read_csv("data/ProcessedQuantiumData.csv")
+data = pd.read_csv("data/ProcessedQuantiumData.csv")
 
-# Make sure Date is treated as a date
-df["Date"] = pd.to_datetime(df["Date"])
+data["Date"] = pd.to_datetime(data["Date"])
 
-# Group by date and total the sales
-daily_sales = df.groupby("Date", as_index=False)["Sales"].sum()
+DailySales = data.groupby("Date", as_index=False)["Sales"].sum()
 
-# Sort by date
-daily_sales = daily_sales.sort_values("Date")
+DailySales = DailySales.sort_values("Date")
 
-# Create line chart
 fig = px.line(
-    daily_sales,
+    DailySales,
     x="Date",
     y="Sales",
-    title="Pink Morsel Sales Over Time",
+    title="Pink morsel sales over time",
     labels={"Date": "Date", "Sales": "Sales"}
 )
 
-# Create app
 app = Dash(__name__)
 
 app.layout = html.Div([
-    html.H1("Soul Foods Pink Morsel Sales Visualiser"),
+    html.H1("Pink morsel sales visualiser"),
     dcc.Graph(figure=fig)
 ])
 
