@@ -23,7 +23,7 @@ app.layout = html.Div(
             },
             children=[
                 html.H1(
-                    "Pink morsels sales visualiser",
+                    "Soul Foods Pink Morsel Sales Visualiser",
                     style={
                         "textAlign": "center",
                         "color": "#1f2d3d",
